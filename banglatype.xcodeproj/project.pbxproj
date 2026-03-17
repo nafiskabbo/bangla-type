@@ -6,6 +6,11 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		E079DEB72F68F95B00747741 /* InputMethodKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E079DEB62F68F95B00747741 /* InputMethodKit.framework */; };
+		E079DEB82F68F95C00747741 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = E079DEB92F68F95C00747741 /* libsqlite3.tbd */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		E079DE9A2F68F95B00747741 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -24,9 +29,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		E079DE8C2F68F95900747741 /* banglatype.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = banglatype.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		E079DE8C2F68F95900747741 /* BanglaType.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BanglaType.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E079DE992F68F95B00747741 /* banglatypeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = banglatypeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E079DEA32F68F95B00747741 /* banglatypeUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = banglatypeUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		E079DEB62F68F95B00747741 /* InputMethodKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = InputMethodKit.framework; path = System/Library/Frameworks/InputMethodKit.framework; sourceTree = SDKROOT; };
+		E079DEB92F68F95C00747741 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -52,6 +59,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E079DEB72F68F95B00747741 /* InputMethodKit.framework in Frameworks */,
+				E079DEB82F68F95C00747741 /* libsqlite3.tbd in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -79,17 +88,27 @@
 				E079DE9C2F68F95B00747741 /* banglatypeTests */,
 				E079DEA62F68F95B00747741 /* banglatypeUITests */,
 				E079DE8D2F68F95900747741 /* Products */,
+				E079DF1A2F6909F600747741 /* Recovered References */,
 			);
 			sourceTree = "<group>";
 		};
 		E079DE8D2F68F95900747741 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				E079DE8C2F68F95900747741 /* banglatype.app */,
+				E079DE8C2F68F95900747741 /* BanglaType.app */,
 				E079DE992F68F95B00747741 /* banglatypeTests.xctest */,
 				E079DEA32F68F95B00747741 /* banglatypeUITests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		E079DF1A2F6909F600747741 /* Recovered References */ = {
+			isa = PBXGroup;
+			children = (
+				E079DEB62F68F95B00747741 /* InputMethodKit.framework */,
+				E079DEB92F68F95C00747741 /* libsqlite3.tbd */,
+			);
+			name = "Recovered References";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -114,7 +133,7 @@
 			packageProductDependencies = (
 			);
 			productName = banglatype;
-			productReference = E079DE8C2F68F95900747741 /* banglatype.app */;
+			productReference = E079DE8C2F68F95900747741 /* BanglaType.app */;
 			productType = "com.apple.product-type.application";
 		};
 		E079DE982F68F95B00747741 /* banglatypeTests */ = {
@@ -398,23 +417,23 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = SUALKQ6XRG;
-				ENABLE_APP_SANDBOX = YES;
+				ENABLE_APP_SANDBOX = NO;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
-				ENABLE_USER_SELECTED_FILES = readonly;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = banglatype/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = BanglaType;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.banglatype;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				REGISTER_APP_GROUPS = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.banglatype.inputmethod.BanglaType;
+				PRODUCT_NAME = BanglaType;
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
-				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
 				SWIFT_VERSION = 5.0;
@@ -430,23 +449,23 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = SUALKQ6XRG;
-				ENABLE_APP_SANDBOX = YES;
+				ENABLE_APP_SANDBOX = NO;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
-				ENABLE_USER_SELECTED_FILES = readonly;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = banglatype/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = BanglaType;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.banglatype;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				REGISTER_APP_GROUPS = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.banglatype.inputmethod.BanglaType;
+				PRODUCT_NAME = BanglaType;
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
-				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
 				SWIFT_VERSION = 5.0;

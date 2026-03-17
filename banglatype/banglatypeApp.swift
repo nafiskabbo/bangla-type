@@ -1,14 +1,12 @@
 //
 //  banglatypeApp.swift
-//  banglatype
-//
-//  Created by Nafis Kabbo on 17/3/26.
+//  BanglaType — SwiftUI used for Preferences window only (NSHostingView).
+//  Entry point is main.swift + AppDelegate.
 //
 
 import SwiftUI
 
-@main
-struct banglatypeApp: App {
+struct BanglaTypeApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()

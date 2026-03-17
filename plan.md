@@ -5,6 +5,7 @@
 > **Focus**: Bangladesh 🇧🇩 — Bangladeshi Bangla only
 > **Architecture**: IMKInputController-based macOS Input Method Extension
 > **Target**: `/Library/Input Methods/BanglaType.app`
+> **Logo**: [`logo/banglatype.svg`](logo/banglatype.svg) — green Bengali “ব” wordmark for app icon & docs
 
 ---
 
@@ -47,16 +48,18 @@ Buildable Xcode project that macOS recognises as a valid input method, with CI c
 ```
 Prompt Cursor:
 "Create a new macOS app Xcode project named 'BanglaType' with bundle identifier
-'com.your-org.inputmethod.BanglaType'. The target must install to
+'com.banglatype.inputmethod.BanglaType'. The target must install to
 /Library/Input Methods/. Remove the default SwiftUI @main entry point and
 ContentView. Set the minimum deployment target to macOS 13.0. Add the
 InputMethodKit framework as a linked library."
 ```
 
+**Logo:** Use [`logo/banglatype.svg`](logo/banglatype.svg) for app icon (export PNGs for AppIcon.appiconset) and README.
+
 **Critical `Info.plist` keys:**
 ```xml
 <key>InputMethodConnectionName</key>
-<string>com.your-org.inputmethod.BanglaType_Connection</string>
+<string>com.banglatype.inputmethod.BanglaType_Connection</string>
 <key>InputMethodServerControllerClass</key>
 <string>BanglaType.BanglaInputController</string>
 <key>tsInputMethodIconName</key>
@@ -537,10 +540,10 @@ Prompt Cursor:
 cask 'BanglaType' do
   version 'VERSION'
   sha256 'SHA256'
-  url "https://github.com/your-org/BanglaType/releases/download/vVERSION/BanglaType-VERSION.dmg"
+  url "https://github.com/nafiskabbo/bangla-type/releases/download/vVERSION/BanglaType-VERSION.dmg"
   name 'BanglaType'
   desc 'Open-source Bangladeshi Bangla input method for macOS'
-  homepage 'https://github.com/your-org/BanglaType'
+  homepage 'https://github.com/nafiskabbo/bangla-type'
   app 'BanglaType.app', target: '/Library/Input Methods/BanglaType.app'
 end
 ```

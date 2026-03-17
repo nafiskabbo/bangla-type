@@ -1,0 +1,29 @@
+name: Release
+on:
+  push:
+    tags:
+      - 'v*'
+jobs:
+  build-and-release:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build Release
+        run: |
+          xcodebuild -scheme banglatype -configuration Release \
+            -derivedDataPath build -destination 'platform=macOS' build
+      - name: Create DMG
+        run: |
+          VERSION=${GITHUB_REF#refs/tags/v}
+          mkdir -p build/dmg_tmp
+          cp -R build/Build/Products/Release/BanglaType.app build/dmg_tmp/
+          ln -s "/Library/Input Methods" "build/dmg_tmp/Install to Input Methods"
+          hdiutil create -volname "BanglaType $VERSION" -srcfolder build/dmg_tmp \
+            -ov -format UDZO "build/BanglaType-$VERSION.dmg"
+      - name: Upload to Release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: build/BanglaType-*.dmg
+          generate_release_notes: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
