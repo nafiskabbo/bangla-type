@@ -35,6 +35,7 @@ Thank you for your interest in contributing to **BanglaType** — the open-sourc
 4. **Commit** with clear messages (e.g. `Fix layout recursion in Preferences window`).
 5. **Push** to your fork and open a **Pull Request** against `main`.
 6. In the PR description, explain what changed and why.
+7. For changes that affect users, add an entry under **[Unreleased](CHANGELOG.md)** in `CHANGELOG.md` (see [Keep a Changelog](https://keepachangelog.com/)).
 
 ---
 

@@ -3,28 +3,78 @@ on:
   push:
     tags:
       - 'v*'
+  workflow_dispatch:
+    inputs:
+      tag_version:
+        description: 'Release tag (e.g. v1.0.0)'
+        required: true
+        type: string
+# GITHUB_TOKEN is automatic; no need to create or store any secret
+permissions:
+  contents: write   # create releases, create tags, upload DMG assets
 jobs:
   build-and-release:
     runs-on: macos-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set version and tag
+        id: version
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            TAG="${{ github.event.inputs.tag_version }}"
+            VERSION="${TAG#v}"
+          else
+            TAG="${GITHUB_REF#refs/tags/}"
+            VERSION="${TAG#v}"
+          fi
+          echo "tag=$TAG" >> "$GITHUB_OUTPUT"
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+
       - name: Build Release
         run: |
           xcodebuild -scheme banglatype -configuration Release \
             -derivedDataPath build -destination 'platform=macOS' build \
             CODE_SIGN_IDENTITY="-" CODE_SIGNING_REQUIRED=NO
+
       - name: Create DMG
         run: |
-          VERSION=${GITHUB_REF#refs/tags/v}
+          VERSION="${{ steps.version.outputs.version }}"
           mkdir -p build/dmg_tmp
           cp -R build/Build/Products/Release/BanglaType.app build/dmg_tmp/
           ln -s "/Library/Input Methods" "build/dmg_tmp/Install to Input Methods"
           hdiutil create -volname "BanglaType $VERSION" -srcfolder build/dmg_tmp \
             -ov -format UDZO "build/BanglaType-$VERSION.dmg"
+
+      - name: Extract release notes from CHANGELOG
+        id: changelog
+        run: |
+          VERSION="${{ steps.version.outputs.version }}"
+          if [ -f CHANGELOG.md ]; then
+            BODY=$(sed -n "/## \[$VERSION\]/,/^## \[/p" CHANGELOG.md || true)
+            if [ -n "$BODY" ] && echo "$BODY" | tail -1 | grep -q '^## \['; then
+              BODY=$(echo "$BODY" | sed '$d')
+            fi
+            if [ -z "$BODY" ]; then
+              BODY="See [CHANGELOG.md](https://github.com/${{ github.repository }}/blob/${{ steps.version.outputs.tag }}/CHANGELOG.md) for details."
+            fi
+          else
+            BODY="Release $VERSION. See commit history for details."
+          fi
+          DELIM=$(openssl rand -hex 16)
+          printf "body<<%s\n%s\n%s\n" "$DELIM" "$BODY" "$DELIM" >> "$GITHUB_OUTPUT"
+
       - name: Upload to Release
-        uses: softprops/action-gh-release@v1
+        uses: softprops/action-gh-release@v2
         with:
+          tag_name: ${{ steps.version.outputs.tag }}
+          name: BanglaType ${{ steps.version.outputs.version }}
+          body: ${{ steps.changelog.outputs.body }}
           files: build/BanglaType-*.dmg
-          generate_release_notes: true
+          generate_release_notes: false
+          draft: false
+          make_latest: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

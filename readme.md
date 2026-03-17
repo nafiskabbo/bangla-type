@@ -29,7 +29,7 @@ See [Features](docs/FEATURES.md) and [Keyboard layouts](docs/KEYBOARD_LAYOUTS.md
 
 ---
 
-## 📥 How to install (beginner-friendly)
+## 📥 How to install
 
 ### Step 1 — Get the app
 
@@ -101,6 +101,7 @@ If **BanglaType** doesn’t appear in **System Settings → Keyboard → Input S
 
 | Link | Description |
 |------|-------------|
+| [Changelog](CHANGELOG.md) | Version history and release notes |
 | [Features](docs/FEATURES.md) | Full feature list |
 | [Keyboard layouts](docs/KEYBOARD_LAYOUTS.md) | All 7 layouts |
 | [Shortcuts](docs/SHORTCUTS.md) | Keyboard shortcuts |
@@ -111,7 +112,8 @@ If **BanglaType** doesn’t appear in **System Settings → Keyboard → Input S
 ## Releases and DMG
 
 - **Releases:** [github.com/nafiskabbo/bangla-type/releases](https://github.com/nafiskabbo/bangla-type/releases)  
-- When we push a **tag** like `v1.0.0`, GitHub Actions builds the app and attaches a **DMG** to that release.  
+- Release notes and version history are in **[CHANGELOG.md](CHANGELOG.md)**.  
+- When we push a **tag** like `v1.0.0` (or run the **Release** workflow from the Actions tab with that tag), GitHub Actions builds the app and attaches a **DMG** to that release.  
 - You can download the DMG from the Releases page and install as in Step 1 above.
 
 ---
