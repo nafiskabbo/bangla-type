@@ -11,7 +11,8 @@ jobs:
       - name: Build Release
         run: |
           xcodebuild -scheme banglatype -configuration Release \
-            -derivedDataPath build -destination 'platform=macOS' build
+            -derivedDataPath build -destination 'platform=macOS' build \
+            CODE_SIGN_IDENTITY="-" CODE_SIGNING_REQUIRED=NO
       - name: Create DMG
         run: |
           VERSION=${GITHUB_REF#refs/tags/v}
