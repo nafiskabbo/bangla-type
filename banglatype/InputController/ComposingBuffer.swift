@@ -27,6 +27,12 @@ final class ComposingBuffer {
         delegate?.onBufferChanged(text: buffer)
     }
 
+    /// Replaces the entire composing text (e.g. phonetic returns full transliteration each keystroke).
+    func setContents(_ string: String) {
+        buffer = string
+        delegate?.onBufferChanged(text: buffer)
+    }
+
     func deleteLastScalar() {
         guard let idx = buffer.unicodeScalars.indices.last else { return }
         buffer.unicodeScalars.remove(at: idx)

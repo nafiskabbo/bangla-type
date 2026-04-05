@@ -6,15 +6,21 @@ All notable changes to BanglaType are documented here. The format is based on [K
 
 ### Added
 
-- (Add new changes here for the next release.)
+- Documented Gatekeeper/quarantine fix (“damaged” message) and clean reinstall steps in the readme.
+- **Input modes:** seven separate entries in **System Settings → Keyboard → Input Sources** (Avro Phonetic, Probhat, Munir Optima, Avro Easy, Bornona, National Jatiya, Akkhor), via `ComponentInputModeDict` and localized names in `en.lproj/InfoPlist.strings`.
+- `InputSourceModeCoordinator` (Carbon/TIS) to sync the active layout with the selected input mode and to switch TIS when picking a layout from the menu bar.
 
 ### Changed
 
-- (List changes in behaviour or UI.)
+- **`CFBundleDevelopmentRegion`** set to **`bn`**; each mode declares **`TISIntendedLanguage`** **`bn`** so sources list under **Bangla**.
+- Menu bar layout changes call **`TISSelectInputSource`** when possible so Input Sources and the engine stay aligned.
 
 ### Fixed
 
-- (List bug fixes.)
+- **Typing in normal apps:** the old “secure field” check used `selectedRange == NSNotFound`, which matches many non-password IMK clients (e.g. web views) and disabled all processing — replaced with a narrow secure-field check.
+- Key handling: fall back to **`charactersIgnoringModifiers`** when **`characters`** is empty; explicitly request **keyDown** in **`recognizedEvents`**.
+- **Phonetic preview + IMK:** Avro returns the *full* Bangla preview every keystroke; the controller was **appending** it each time (garbled / empty effect). It now **replaces** the composing buffer for phonetic, uses **`composedString`** + **`updateComposition`**, commits once on **`.commit`**, and resets the phonetic Latin buffer on **`commitComposition`** / deactivate.
+- **Input Sources icons:** `AppIcon.icns` was used for every mode (huge in the picker). Modes now use **`BanglaTypeInputMethod.icns`** (16–64 px, `tools/gen_input_method_icon.swift`).
 
 ### Removed
 

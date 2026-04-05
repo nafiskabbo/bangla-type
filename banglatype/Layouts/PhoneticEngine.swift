@@ -47,6 +47,11 @@ final class PhoneticEngine: LayoutEngineProtocol {
         return result
     }
 
+    /// Clears the Latin buffer (e.g. when the IMK client ends composition).
+    func reset() {
+        buffer = ""
+    }
+
     private func longestMatch(_ s: String) -> (String?, Int) {
         let keys = AvroRules.patterns.keys.sorted { $0.count > $1.count }
         for key in keys {

@@ -36,9 +36,22 @@
 		E079DEB92F68F95C00747741 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		E079DF212F690A000747741 /* Exceptions for "banglatype" folder in "banglatype" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = E079DE8B2F68F95900747741 /* banglatype */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		E079DE8E2F68F95900747741 /* banglatype */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				E079DF212F690A000747741 /* Exceptions for "banglatype" folder in "banglatype" target */,
+			);
 			path = banglatype;
 			sourceTree = "<group>";
 		};

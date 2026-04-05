@@ -60,20 +60,21 @@ If you skip this, BanglaType will **not** show up in the input list.
 
 ---
 
-### Step 3 — Add BanglaType as an input source
+### Step 3 — Add BanglaType input modes
 
-1. Open **System Settings** (or **System Preferences**).  
-2. Go to **Keyboard** → **Input Sources** (or **Input Methods**).  
-3. Click the **+** button.  
-4. Search for **“Bangla”** or scroll to find **BanglaType**.  
-5. Select **BanglaType** and click **Add**.
+BanglaType exposes **seven input modes** (Avro Phonetic, Probhat, Munir Optima, etc.) under **Bangla** in **System Settings → Keyboard → Input Sources**.
+
+1. Open **System Settings** → **Keyboard** → **Input Sources** → **Edit…** → **+**.  
+2. Select **Bangla** in the sidebar (or search **Bangla**).  
+3. Add each mode you want (e.g. **BanglaType — Avro Phonetic**, **BanglaType — Probhat**, …).  
+4. If you upgraded from an older build that only showed a single “BanglaType” row, **remove** that old entry first, then add the new modes.
 
 ---
 
 ### Step 4 — Start typing
 
-- Click the **input menu** in the menu bar (e.g. “ABC” or a flag) and choose **BanglaType**.  
-- You should see a **বাং·অভ্র** (or similar) icon — click it to change layout or open **Preferences**.
+- Pick a BanglaType mode from the **input menu** in the menu bar (or press **Control + Space** / your shortcut to cycle sources).  
+- The menu bar **বাং·…** item still switches layouts and opens **Preferences**; it stays in sync with the mode selected in Input Sources when possible.
 
 ---
 
@@ -85,6 +86,49 @@ If **BanglaType** doesn’t appear in **System Settings → Keyboard → Input S
 2. **Logged out and in?** You must log out and log back in (or restart) after installing.  
 3. **Quit and try again:** In Terminal run `killall BanglaType`, then copy the app to `/Library/Input Methods/` again and log out/in.  
 4. **macOS version:** You need **macOS 13 (Ventura)** or later.
+
+---
+
+## ❓ “BanglaType.app” is damaged and can’t be opened
+
+That message is **usually Gatekeeper**, not a broken download. macOS adds a **quarantine** flag when you download a ZIP/DMG or copy from the internet; unsigned or non-notarized builds then fail verification.
+
+**Fix (after installing to Input Methods):**
+
+```bash
+sudo xattr -dr com.apple.quarantine "/Library/Input Methods/BanglaType.app"
+```
+
+Then **log out and back in** (or restart). If it still blocks, open **System Settings → Privacy & Security** and look for an option to allow BanglaType, or **right‑click the app → Open** once (if you are opening the `.app` from the DMG to test).
+
+For a **fully trusted** install with no prompts, the release needs **Developer ID signing + notarization** (see [Building](docs/BUILDING.md)).
+
+---
+
+## 🔄 Clean reinstall (remove everything, then install again)
+
+1. Open **System Settings → Keyboard → Input Sources**, select **BanglaType**, and remove it (**−**).  
+2. Quit the app if it is running:
+
+   ```bash
+   killall BanglaType 2>/dev/null || true
+   ```
+
+3. Remove the installed bundle:
+
+   ```bash
+   sudo rm -rf "/Library/Input Methods/BanglaType.app"
+   ```
+
+4. Install a fresh copy (from a new build or DMG):
+
+   ```bash
+   sudo cp -R "/path/to/BanglaType.app" "/Library/Input Methods/"
+   sudo xattr -dr com.apple.quarantine "/Library/Input Methods/BanglaType.app"
+   ```
+
+5. **Log out and log back in** (or restart).  
+6. Add **BanglaType** again under **Input Sources**. It should be listed under **Bangla** (or your system’s name for the `bn` language), not under English.
 
 ---
 

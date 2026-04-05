@@ -23,10 +23,7 @@ final class LayoutManager {
     var activeLayoutIndex: Int {
         get { activeIndex }
         set {
-            guard newValue >= 0, newValue < engines.count else { return }
-            activeIndex = newValue
-            UserDefaults.standard.set(activeIndex, forKey: "BanglaTypeActiveLayoutIndex")
-            NotificationCenter.default.post(name: .banglaTypeLayoutChanged, object: nil)
+            switchToLayout(index: newValue)
         }
     }
 
@@ -81,9 +78,8 @@ final class LayoutManager {
 
     func switchToNextLayout() {
         guard !layouts.isEmpty, !engines.isEmpty else { return }
-        activeIndex = (activeIndex + 1) % engines.count
-        UserDefaults.standard.set(activeIndex, forKey: "BanglaTypeActiveLayoutIndex")
-        NotificationCenter.default.post(name: .banglaTypeLayoutChanged, object: nil)
+        let next = (activeIndex + 1) % engines.count
+        switchToLayout(index: next)
     }
 
     func switchToLayout(index: Int) {
@@ -91,6 +87,23 @@ final class LayoutManager {
         activeIndex = index
         UserDefaults.standard.set(activeIndex, forKey: "BanglaTypeActiveLayoutIndex")
         NotificationCenter.default.post(name: .banglaTypeLayoutChanged, object: nil)
+        InputSourceModeCoordinator.shared.selectInputModeIfNeeded(layoutIndex: index)
+    }
+
+    /// Updates index from TIS (system Input Sources / mode switch) without calling back into TIS.
+    func setActiveLayoutIndexFromSystem(_ index: Int) {
+        guard index >= 0, index < engines.count else { return }
+        guard index != activeIndex else { return }
+        activeIndex = index
+        UserDefaults.standard.set(activeIndex, forKey: "BanglaTypeActiveLayoutIndex")
+        NotificationCenter.default.post(name: .banglaTypeLayoutChanged, object: nil)
+    }
+
+    /// Drop any in-progress phonetic Latin buffer when composition ends or input deactivates.
+    func resetPhoneticEngineBufferIfNeeded() {
+        guard activeIndex >= 0, activeIndex < engines.count,
+              let phonetic = engines[activeIndex] as? PhoneticEngine else { return }
+        phonetic.reset()
     }
 }
 

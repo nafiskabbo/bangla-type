@@ -22,15 +22,49 @@ final class BanglaInputController: IMKInputController, ComposingBufferDelegate {
     }
 
     func onBufferChanged(text: String) {
-        guard let client = client() as? IMKTextInput else { return }
-        client.setMarkedText(NSAttributedString(string: text), selectionRange: NSRange(location: text.count, length: 0), replacementRange: NSRange(location: NSNotFound, length: 0))
+        _ = text
+        updateComposition()
     }
 
-    /// Secure text (e.g. password fields): selectedRange is often {NSNotFound, 0}. Don't compose; passthrough.
+    /// IMK uses this when pushing marked text to the client; must match our composing buffer.
+    override func composedString(_ sender: Any!) -> Any! {
+        composingBuffer.text as NSString
+    }
+
+    /// Only skip IM processing for real secure fields. Many IMK clients (e.g. web views) report
+    /// `selectedRange.location == NSNotFound` for normal text; treating that as "secure" broke all typing.
     private func isSecureTextInput(_ sender: Any?) -> Bool {
-        guard let client = sender as? NSTextInputClient else { return false }
-        let r = client.selectedRange()
-        return r.location == NSNotFound && r.length == 0
+        guard let o = sender as AnyObject? else { return false }
+        return String(describing: type(of: o)).contains("SecureText")
+    }
+
+    override func recognizedEvents(_ sender: Any!) -> Int {
+        Int(NSEvent.EventTypeMask.keyDown.rawValue)
+    }
+
+    override func activateServer(_ sender: Any!) {
+        super.activateServer(sender)
+        InputSourceModeCoordinator.shared.syncLayoutIndexFromSystem()
+    }
+
+    override func deactivateServer(_ sender: Any!) {
+        composingBuffer.deleteAll()
+        LayoutManager.shared.resetPhoneticEngineBufferIfNeeded()
+        super.deactivateServer(sender)
+    }
+
+    override func commitComposition(_ sender: Any!) {
+        setupBufferDelegateIfNeeded()
+        guard let client = client() as? IMKTextInput else {
+            super.commitComposition(sender)
+            return
+        }
+        let text = composingBuffer.commit()
+        LayoutManager.shared.resetPhoneticEngineBufferIfNeeded()
+        if !text.isEmpty {
+            client.insertText(text.precomposedStringWithCanonicalMapping, replacementRange: NSRange(location: NSNotFound, length: 0))
+        }
+        updateComposition()
     }
 
     override func handle(_ event: NSEvent!, client sender: Any!) -> Bool {
@@ -44,7 +78,9 @@ final class BanglaInputController: IMKInputController, ComposingBufferDelegate {
             return handleShortcut(ev, client: client)
         }
 
-        let key = ev.characters ?? ""
+        let key = (ev.characters?.isEmpty == false ? ev.characters : nil)
+            ?? ev.charactersIgnoringModifiers
+            ?? ""
         if key.isEmpty {
             if ev.keyCode == 36 {
                 commitComposition(client: client)
@@ -62,16 +98,13 @@ final class BanglaInputController: IMKInputController, ComposingBufferDelegate {
 
         switch output {
         case .commit(let str):
-            if !composingBuffer.text.isEmpty {
-                let committed = composingBuffer.commit()
-                client.insertText(committed.precomposedStringWithCanonicalMapping, replacementRange: NSRange(location: NSNotFound, length: 0))
-            }
-            if !str.isEmpty {
-                client.insertText(str.precomposedStringWithCanonicalMapping, replacementRange: NSRange(location: NSNotFound, length: 0))
-            }
-            return true
+            return applyCommit(str, client: client)
         case .compose(let str):
-            composingBuffer.append(string: str)
+            if LayoutManager.shared.activeEngine is PhoneticEngine {
+                composingBuffer.setContents(str)
+            } else {
+                composingBuffer.append(string: str)
+            }
             return true
         case .passthrough:
             if composingBuffer.text.isEmpty {
@@ -85,21 +118,20 @@ final class BanglaInputController: IMKInputController, ComposingBufferDelegate {
     }
 
     override func inputText(_ string: String!, client sender: Any!) -> Bool {
-        guard let s = string, let client = sender as? IMKTextInput else { return false }
+        guard let s = string, !s.isEmpty, let client = sender as? IMKTextInput else { return false }
         if isSecureTextInput(sender) { return false }
         setupBufferDelegateIfNeeded()
         let engine = LayoutManager.shared.activeEngine
         let output = engine.process(key: s, modifiers: [])
         switch output {
         case .commit(let str):
-            if !composingBuffer.text.isEmpty {
-                let committed = composingBuffer.commit()
-                client.insertText(committed.precomposedStringWithCanonicalMapping, replacementRange: NSRange(location: NSNotFound, length: 0))
-            }
-            client.insertText(str.precomposedStringWithCanonicalMapping, replacementRange: NSRange(location: NSNotFound, length: 0))
-            return true
+            return applyCommit(str, client: client)
         case .compose(let str):
-            composingBuffer.append(string: str)
+            if LayoutManager.shared.activeEngine is PhoneticEngine {
+                composingBuffer.setContents(str)
+            } else {
+                composingBuffer.append(string: str)
+            }
             return true
         case .passthrough, .consumed:
             return false
@@ -132,11 +164,23 @@ final class BanglaInputController: IMKInputController, ComposingBufferDelegate {
     }
 
     private func handleShortcut(_ event: NSEvent, client: IMKTextInput) -> Bool {
-        return false
+        false
+    }
+
+    /// Single insert path for committed text; clears IMK composing state.
+    private func applyCommit(_ str: String, client: IMKTextInput) -> Bool {
+        composingBuffer.deleteAll()
+        LayoutManager.shared.resetPhoneticEngineBufferIfNeeded()
+        updateComposition()
+        if !str.isEmpty {
+            client.insertText(str.precomposedStringWithCanonicalMapping, replacementRange: NSRange(location: NSNotFound, length: 0))
+        }
+        return true
     }
 
     private func commitComposition(client: IMKTextInput) {
         let text = composingBuffer.commit()
+        LayoutManager.shared.resetPhoneticEngineBufferIfNeeded()
         if !text.isEmpty {
             client.insertText(text.precomposedStringWithCanonicalMapping, replacementRange: NSRange(location: NSNotFound, length: 0))
         }
