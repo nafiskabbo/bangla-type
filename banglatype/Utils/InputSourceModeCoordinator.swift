@@ -20,13 +20,14 @@ enum BanglaInputModeIDs {
         "com.banglatype.inputmethod.BanglaType.Akkhor",
     ]
 
-    static func layoutIndex(forInputSourceID id: String) -> Int? {
+    static func layoutIndex(forInputModeID id: String) -> Int? {
         all.firstIndex(of: id)
     }
 }
 
 final class InputSourceModeCoordinator {
     static let shared = InputSourceModeCoordinator()
+    private static let fallbackBundleID = "com.banglatype.inputmethod.BanglaType"
 
     private var syncingFromSystem = false
 
@@ -40,8 +41,8 @@ final class InputSourceModeCoordinator {
     /// Read the active keyboard input source and align `LayoutManager` (no TIS select).
     func syncLayoutIndexFromSystem() {
         guard !isRunningAsXCTestHost else { return }
-        guard let id = currentKeyboardInputSourceID(),
-              let idx = BanglaInputModeIDs.layoutIndex(forInputSourceID: id) else { return }
+        guard let id = currentKeyboardInputModeID(),
+              let idx = BanglaInputModeIDs.layoutIndex(forInputModeID: id) else { return }
         syncingFromSystem = true
         defer { syncingFromSystem = false }
         LayoutManager.shared.setActiveLayoutIndexFromSystem(idx)
@@ -53,20 +54,44 @@ final class InputSourceModeCoordinator {
         guard !syncingFromSystem else { return }
         guard index >= 0, index < BanglaInputModeIDs.all.count else { return }
         let targetID = BanglaInputModeIDs.all[index]
-        guard currentKeyboardInputSourceID() != targetID else { return }
-        selectInputSource(withID: targetID)
+        guard currentKeyboardInputModeID() != targetID else { return }
+        selectInputMode(withID: targetID)
     }
 
-    private func currentKeyboardInputSourceID() -> String? {
+    private func currentKeyboardInputModeID() -> String? {
         guard let current = TISCopyCurrentKeyboardInputSource()?.takeRetainedValue() else { return nil }
-        guard let ptr = TISGetInputSourceProperty(current, kTISPropertyInputSourceID) else { return nil }
+        if let modeID = inputSourceStringProperty(current, key: kTISPropertyInputModeID) {
+            return modeID
+        }
+        return inputSourceStringProperty(current, key: kTISPropertyInputSourceID)
+    }
+
+    private func inputSourceStringProperty(_ source: TISInputSource, key: CFString) -> String? {
+        guard let ptr = TISGetInputSourceProperty(source, key) else { return nil }
         return Unmanaged<CFString>.fromOpaque(ptr).takeUnretainedValue() as String
     }
 
-    private func selectInputSource(withID modeID: String) {
-        let filter: [CFString: Any] = [kTISPropertyInputSourceID: modeID as CFString]
-        guard let list = TISCreateInputSourceList(filter as CFDictionary, false)?.takeRetainedValue() as? [TISInputSource],
-              let source = list.first else { return }
+    private func selectInputMode(withID modeID: String) {
+        let bundleID = Bundle.main.bundleIdentifier ?? Self.fallbackBundleID
+        let exactFilter: [CFString: Any] = [
+            kTISPropertyBundleID: bundleID as CFString,
+            kTISPropertyInputModeID: modeID as CFString,
+            kTISPropertyInputSourceType: kTISTypeKeyboardInputMode!
+        ]
+
+        let fallbackFilter: [CFString: Any] = [
+            kTISPropertyInputModeID: modeID as CFString
+        ]
+
+        guard let source = firstMatchingInputSource(filter: exactFilter)
+            ?? firstMatchingInputSource(filter: fallbackFilter) else { return }
         TISSelectInputSource(source)
+    }
+
+    private func firstMatchingInputSource(filter: [CFString: Any]) -> TISInputSource? {
+        guard let list = TISCreateInputSourceList(filter as CFDictionary, false)?.takeRetainedValue() as? [TISInputSource] else {
+            return nil
+        }
+        return list.first
     }
 }

@@ -68,7 +68,7 @@
 				<key>tsInputModeAlternateMenuIconFileKey</key>
 				<string>BanglaTypeInputMethod.icns</string>
 				<key>tsInputModeDefaultStateKey</key>
-				<true/>
+				<false/>
 				<key>tsInputModeScriptKey</key>
 				<string>smUnicodeScript</string>
 				<key>tsInputModePrimaryInScriptKey</key>
@@ -87,7 +87,7 @@
 				<key>tsInputModeAlternateMenuIconFileKey</key>
 				<string>BanglaTypeInputMethod.icns</string>
 				<key>tsInputModeDefaultStateKey</key>
-				<true/>
+				<false/>
 				<key>tsInputModeScriptKey</key>
 				<string>smUnicodeScript</string>
 				<key>tsInputModePrimaryInScriptKey</key>
@@ -106,7 +106,7 @@
 				<key>tsInputModeAlternateMenuIconFileKey</key>
 				<string>BanglaTypeInputMethod.icns</string>
 				<key>tsInputModeDefaultStateKey</key>
-				<true/>
+				<false/>
 				<key>tsInputModeScriptKey</key>
 				<string>smUnicodeScript</string>
 				<key>tsInputModePrimaryInScriptKey</key>
@@ -125,7 +125,7 @@
 				<key>tsInputModeAlternateMenuIconFileKey</key>
 				<string>BanglaTypeInputMethod.icns</string>
 				<key>tsInputModeDefaultStateKey</key>
-				<true/>
+				<false/>
 				<key>tsInputModeScriptKey</key>
 				<string>smUnicodeScript</string>
 				<key>tsInputModePrimaryInScriptKey</key>
@@ -144,7 +144,7 @@
 				<key>tsInputModeAlternateMenuIconFileKey</key>
 				<string>BanglaTypeInputMethod.icns</string>
 				<key>tsInputModeDefaultStateKey</key>
-				<true/>
+				<false/>
 				<key>tsInputModeScriptKey</key>
 				<string>smUnicodeScript</string>
 				<key>tsInputModePrimaryInScriptKey</key>
@@ -163,7 +163,7 @@
 				<key>tsInputModeAlternateMenuIconFileKey</key>
 				<string>BanglaTypeInputMethod.icns</string>
 				<key>tsInputModeDefaultStateKey</key>
-				<true/>
+				<false/>
 				<key>tsInputModeScriptKey</key>
 				<string>smUnicodeScript</string>
 				<key>tsInputModePrimaryInScriptKey</key>
