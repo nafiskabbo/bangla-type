@@ -107,7 +107,7 @@ For a **fully trusted** install with no prompts, the release needs **Developer I
 
 ## 🔄 Clean reinstall (remove everything, then install again)
 
-1. Open **System Settings → Keyboard → Input Sources**, select **BanglaType**, and remove it (**−**).  
+1. Open **System Settings → Keyboard → Input Sources** and remove **every** BanglaType entry (**−**) — each **BanglaType — …** mode plus any legacy single **BanglaType** row if present.  
 2. Quit the app if it is running:
 
    ```bash
@@ -128,7 +128,7 @@ For a **fully trusted** install with no prompts, the release needs **Developer I
    ```
 
 5. **Log out and log back in** (or restart).  
-6. Add **BanglaType** again under **Input Sources**. It should be listed under **Bangla** (or your system’s name for the `bn` language), not under English.
+6. Add the **BanglaType** modes you want again under **Input Sources** (see Step 3 above). They should appear under **Bangla** (or your system’s name for the `bn` language), not under English.
 
 ---
 
