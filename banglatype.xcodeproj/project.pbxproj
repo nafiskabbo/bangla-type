@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		E079DEB72F68F95B00747741 /* InputMethodKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E079DEB62F68F95B00747741 /* InputMethodKit.framework */; };
-		E079DEB82F68F95C00747741 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = E079DEB92F68F95C00747741 /* libsqlite3.tbd */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -33,7 +32,6 @@
 		E079DE992F68F95B00747741 /* banglatypeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = banglatypeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E079DEA32F68F95B00747741 /* banglatypeUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = banglatypeUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E079DEB62F68F95B00747741 /* InputMethodKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = InputMethodKit.framework; path = System/Library/Frameworks/InputMethodKit.framework; sourceTree = SDKROOT; };
-		E079DEB92F68F95C00747741 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -73,7 +71,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				E079DEB72F68F95B00747741 /* InputMethodKit.framework in Frameworks */,
-				E079DEB82F68F95C00747741 /* libsqlite3.tbd in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -119,7 +116,6 @@
 			isa = PBXGroup;
 			children = (
 				E079DEB62F68F95B00747741 /* InputMethodKit.framework */,
-				E079DEB92F68F95C00747741 /* libsqlite3.tbd */,
 			);
 			name = "Recovered References";
 			sourceTree = "<group>";

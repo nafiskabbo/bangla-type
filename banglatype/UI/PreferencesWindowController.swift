@@ -67,9 +67,8 @@ struct PreferencesRootView: View {
             ShortcutsPreferencesView().tabItem { Label("Shortcuts", systemImage: "keyboard") }.tag(2)
             LayoutsPreferencesView().tabItem { Label("Layouts", systemImage: "list.bullet") }.tag(3)
             PhoneticPreferencesView().tabItem { Label("Phonetic", systemImage: "character.book.closed") }.tag(4)
-            DictionaryPreferencesView().tabItem { Label("Dictionary", systemImage: "book") }.tag(5)
-            AdvancedPreferencesView().tabItem { Label("Advanced", systemImage: "slider.horizontal.3") }.tag(6)
-            AboutPreferencesView().tabItem { Label("About", systemImage: "info.circle") }.tag(7)
+            AdvancedPreferencesView().tabItem { Label("Advanced", systemImage: "slider.horizontal.3") }.tag(5)
+            AboutPreferencesView().tabItem { Label("About", systemImage: "info.circle") }.tag(6)
         }
         .frame(width: 640, height: 480)
     }

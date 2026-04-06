@@ -15,8 +15,6 @@ final class BanglaInputController: IMKInputController, ComposingBufferDelegate {
         let b = ComposingBuffer()
         return b
     }()
-    private let candidateController = CandidateController()
-
     private func setupBufferDelegateIfNeeded() {
         if composingBuffer.delegate == nil { composingBuffer.delegate = self }
     }
