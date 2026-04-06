@@ -110,7 +110,7 @@ Do this if you want a disk image to share or install from (like a release).
    *Skipping this often means BanglaType never appears in Input Sources.*
 
 5. **Add input modes:** **System Settings → Keyboard → Input Sources → Edit… → +** → **Bangla**.  
-   Add each **BanglaType — …** mode you want (Avro Phonetic, Probhat, etc.). Remove any **old** single “BanglaType” entry from a previous install first.
+   Add each **BanglaType - …** mode you want (Avro Phonetic, Probhat, etc.). Remove any **old** single “BanglaType” entry from a previous install first.
 
 6. **Use it:** Click the **input menu** in the menu bar (e.g. “A”, “ABC”, or a flag) and choose **BanglaType**. Type in any normal app.
 

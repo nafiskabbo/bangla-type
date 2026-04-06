@@ -66,7 +66,7 @@ BanglaType exposes **seven input modes** (Avro Phonetic, Probhat, Munir Optima, 
 
 1. Open **System Settings** → **Keyboard** → **Input Sources** → **Edit…** → **+**.  
 2. Select **Bangla** in the sidebar (or search **Bangla**).  
-3. Add each mode you want (e.g. **BanglaType — Avro Phonetic**, **BanglaType — Probhat**, …).  
+3. Add each mode you want (e.g. **BanglaType - Avro Phonetic**, **BanglaType - Probhat**, …).  
 4. If you upgraded from an older build that only showed a single “BanglaType” row, **remove** that old entry first, then add the new modes.
 
 ---
@@ -107,7 +107,7 @@ For a **fully trusted** install with no prompts, the release needs **Developer I
 
 ## 🔄 Clean reinstall (remove everything, then install again)
 
-1. Open **System Settings → Keyboard → Input Sources** and remove **every** BanglaType entry (**−**) — each **BanglaType — …** mode plus any legacy single **BanglaType** row if present.  
+1. Open **System Settings → Keyboard → Input Sources** and remove **every** BanglaType entry (**−**) — each **BanglaType - …** mode plus any legacy single **BanglaType** row if present.  
 2. Quit the app if it is running:
 
    ```bash
