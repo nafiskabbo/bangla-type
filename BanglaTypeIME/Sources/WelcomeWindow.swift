@@ -245,7 +245,7 @@ class GettingStartedView: NSView {
                     .font: NSFont.systemFont(ofSize: 12), .foregroundColor: secondaryColor,
                 ]))
 
-        // Attribution footer
+        // Footer (engine credit)
         result.append(NSAttributedString(string: "\n\n", attributes: [.font: bodyFont]))
 
         // Separator line
@@ -266,63 +266,7 @@ class GettingStartedView: NSView {
 
         result.append(
             NSAttributedString(
-                string: "Developed by ",
-                attributes: [
-                    .font: NSFont.systemFont(ofSize: 11),
-                    .foregroundColor: secondaryColor,
-                    .paragraphStyle: footerParagraph,
-                ]))
-        result.append(
-            NSAttributedString(
-                string: "Abdur Rahim",
-                attributes: [
-                    .font: NSFont.systemFont(ofSize: 11, weight: .semibold),
-                    .foregroundColor: bodyColor,
-                    .paragraphStyle: footerParagraph,
-                ]))
-        result.append(
-            NSAttributedString(
-                string: "\n",
-                attributes: [
-                    .font: NSFont.systemFont(ofSize: 11),
-                    .paragraphStyle: footerParagraph,
-                ]))
-
-        // GitHub link
-        let githubURL = URL(string: "https://github.com/ARahim3")!
-        result.append(
-            NSAttributedString(
-                string: "github.com/ARahim3",
-                attributes: [
-                    .font: NSFont.systemFont(ofSize: 11),
-                    .foregroundColor: accentColor,
-                    .link: githubURL,
-                    .paragraphStyle: footerParagraph,
-                ]))
-        result.append(
-            NSAttributedString(
-                string: "  \u{00B7}  ",
-                attributes: [
-                    .font: NSFont.systemFont(ofSize: 11),
-                    .foregroundColor: secondaryColor,
-                    .paragraphStyle: footerParagraph,
-                ]))
-
-        // Website link
-        let websiteURL = URL(string: "https://arahim3.github.io")!
-        result.append(
-            NSAttributedString(
-                string: "arahim3.github.io",
-                attributes: [
-                    .font: NSFont.systemFont(ofSize: 11),
-                    .foregroundColor: accentColor,
-                    .link: websiteURL,
-                    .paragraphStyle: footerParagraph,
-                ]))
-
-        result.append(
-            NSAttributedString(
-                string: "\nPowered by OpenBangla\u{2019}s riti engine. Built for the Bengali community on macOS.\n",
+                string: "Powered by OpenBangla\u{2019}s riti engine. Built for the Bengali community on macOS.\n",
                 attributes: [
                     .font: NSFont.systemFont(ofSize: 10),
                     .foregroundColor: NSColor.tertiaryLabelColor,
