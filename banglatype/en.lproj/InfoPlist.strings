@@ -1,8 +1,0 @@
-/* Localized names for each input mode (keys = TIS input source IDs). */
-"com.banglatype.inputmethod.BanglaType.AvroPhonetic" = "BanglaType - Avro Phonetic";
-"com.banglatype.inputmethod.BanglaType.Probhat" = "BanglaType - Probhat";
-"com.banglatype.inputmethod.BanglaType.MunirOptima" = "BanglaType - Munir Optima";
-"com.banglatype.inputmethod.BanglaType.AvroEasy" = "BanglaType - Avro Easy";
-"com.banglatype.inputmethod.BanglaType.Bornona" = "BanglaType - Bornona";
-"com.banglatype.inputmethod.BanglaType.NationalJatiya" = "BanglaType - National (Jatiya)";
-"com.banglatype.inputmethod.BanglaType.Akkhor" = "BanglaType - Akkhor";

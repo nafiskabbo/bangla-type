@@ -1,20 +1,22 @@
-# Xcode build
+# Build artifacts
 build/
-DerivedData/
-*.xcuserstate
-xcuserdata/
+engine/target/
 
 # macOS
 .DS_Store
-.AppleDouble
-.LSOverride
-._*
-.Spotlight-V100
-.Trashes
+*.swp
+*~
 
-# Swift Package Manager
-.build/
-.swiftpm/
+# Private dev notes
+CLAUDE.md
+PLAN.md
+.claude/
 
-# Keep shared project/scheme data
-!xcshareddata/
+# Draft folders (kept locally)
+github_repo_final/
+github_repo_plan/
+
+# Xcode (if ever opened)
+*.xcodeproj
+*.xcworkspace
+xcuserdata/
