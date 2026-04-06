@@ -970,36 +970,6 @@
                 line-height: 1.7;
             }
 
-            /* ========== FOOTER ========== */
-            footer {
-                padding: 2.5rem 2rem;
-                border-top: 1px solid var(--border);
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-                max-width: 960px;
-                margin: 0 auto;
-                flex-wrap: wrap;
-                gap: 1rem;
-            }
-            footer p {
-                font-size: 0.8rem;
-                color: var(--text-dim);
-            }
-            footer a {
-                color: var(--text-secondary);
-                text-decoration: none;
-                font-size: 0.8rem;
-                transition: color 0.2s;
-            }
-            footer a:hover {
-                color: var(--vermillion);
-            }
-            .footer-links {
-                display: flex;
-                gap: 1.5rem;
-            }
-
             /* ========== ANIMATIONS ========== */
             @keyframes fadeInUp {
                 from {
@@ -1091,10 +1061,6 @@
                 .cta-container {
                     padding: 2.5rem 1.5rem;
                 }
-                footer {
-                    flex-direction: column;
-                    text-align: center;
-                }
             }
             @media (max-width: 480px) {
                 .hero h1 {
@@ -1167,7 +1133,7 @@
             </div>
         </nav>
 
-        <!-- FIX: div → <main> for semantic landmark; footer is now outside <main> -->
+        <!-- FIX: div → <main> for semantic landmark -->
         <main style="position: relative">
             <div class="hero-bg-chars" aria-hidden="true">
                 <!-- Row 1: hero area -->
@@ -1615,7 +1581,7 @@
                     "
                     >ম</span
                 >
-                <!-- Row 6: footer area -->
+                <!-- Row 6: lower band -->
                 <span
                     class="hero-bg-char"
                     style="
@@ -2172,34 +2138,6 @@
                 </details>
             </section>
         </main>
-        <!-- FIX: footer moved outside <main> -->
-        <footer>
-            <p>
-                Maintained by
-                <a href="https://github.com/ARahim3" target="_blank" rel="noopener noreferrer"
-                    >Abdur Rahim</a
-                >
-                · Powered by
-                <a href="https://github.com/OpenBangla/riti" target="_blank" rel="noopener noreferrer"
-                    >OpenBangla's riti engine</a
-                >
-                · Not affiliated with OmicronLab
-            </p>
-            <div class="footer-links">
-                <a href="https://github.com/nafiskabbo/bangla-type" target="_blank" rel="noopener noreferrer"
-                    >GitHub</a
-                >
-                <a
-                    href="https://github.com/nafiskabbo/bangla-type/issues"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    >Report Bug</a
-                >
-                <a href="https://arahim3.github.io" target="_blank" rel="noopener noreferrer"
-                    >arahim3.github.io</a
-                >
-            </div>
-        </footer>
 
         <script>
             /* Nav scroll shadow */
